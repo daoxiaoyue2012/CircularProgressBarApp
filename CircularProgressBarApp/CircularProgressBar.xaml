@@ -1,0 +1,40 @@
+﻿<UserControl x:Name="userControl" x:Class="CircularProgressBarApp.CircularProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CircularProgressBarApp"
+             mc:Ignorable="d" >
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Path x:Name="BackgroundPath"
+              Stroke="AntiqueWhite"
+              StrokeThickness="{Binding StrokeThickness, ElementName=userControl}"
+              StrokeStartLineCap="Flat"
+              StrokeEndLineCap="Flat"
+              StrokeDashArray="{Binding StrokeDashPattern, ElementName=userControl}" />
+        <Path x:Name="ForegroundPath"
+              Stroke="{Binding ArcSegmentColor, ElementName=userControl}"
+              StrokeThickness="{Binding StrokeThickness, ElementName=userControl}">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigureCollection>
+                            <PathFigure x:Name="pathFigure">
+                                <PathFigure.Segments>
+                                    <PathSegmentCollection>
+                                        <ArcSegment x:Name="arcSegment"
+                                                    SweepDirection="Clockwise" />
+                                    </PathSegmentCollection>
+                                </PathFigure.Segments>
+                            </PathFigure>
+                        </PathFigureCollection>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+        <TextBlock Text="{Binding Percentage, ElementName=userControl, StringFormat={}{0}%}"
+                   FontSize="{Binding TextSize, ElementName=userControl}" 
+                   Foreground="{Binding TextColor, ElementName=userControl}" 
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>
